@@ -1,1 +1,28 @@
-/.idea
+# Ignore data files
+data/
+
+# Ignore checkpoints files
+checkpoints/
+
+# Ignore IDE and editor files
+.idea/
+.vscode/
+.ipynb_checkpoints/
+.mypy_cache/
+.conda/
+
+# Ignore Python compiled files
+__pycache__/
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+log/
+stoc_log
+
+# Ignore package files
+*.zip
+*.tar.gz
+*.rar
+
+# Ignore test files
