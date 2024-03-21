@@ -11,8 +11,8 @@ from heo.other_methods import isingMac, Lqa
 import pickle
 
 workdir = 'qubo'
-os.makedirs(workdir)
-logger = Logger(f'{workdir}/log.log','sat')
+os.makedirs(workdir,exist_ok=True)
+logger = Logger(f'{workdir}/log.log','qubo')
 
 
 def eval(method, couplings, config):
@@ -43,7 +43,7 @@ def eval(method, couplings, config):
 
 config = {'device':'cuda:0',
           'test_times':10,
-           'datapath': r'/example_data/qubo/rudy_all',
+           'datapath': r'./example_data/rudy_all',
            'unbounded':False,
            'type':'sgd',
            'lr':10,
@@ -68,7 +68,7 @@ for method in methods:
 
 for inst_index in np.arange(instance_num): 
     logger.log(f'problem name: {prob_list[inst_index]}')
-    load_dir = r'{}/{}'.format(prob_list, prob_list[inst_index])
+    load_dir = r'{}/{}'.format(config['datapath'], prob_list[inst_index])
     with open(load_dir) as f:
         lines = f.readlines()
 

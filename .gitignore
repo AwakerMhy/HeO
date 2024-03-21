@@ -18,7 +18,11 @@ __pycache__/
 *.log
 *.tmp
 log/
-stoc_log
+qubo/
+pbo/
+nn/
+sat/
+mvc/
 
 # Ignore package files
 *.zip

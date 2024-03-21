@@ -8,7 +8,7 @@ import os
 
 
 workdir = 'sat'
-os.makedirs(workdir)
+os.makedirs(workdir,exist_ok=True)
 logger = Logger(f'{workdir}/log.log','sat')
 
 def SAT_original(x, index_list, factor_list):

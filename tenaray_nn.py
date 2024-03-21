@@ -9,8 +9,8 @@ import os
 from heo.log import Logger
 
 workdir = 'nn'
-os.makedirs(workdir)
-logger = Logger(f'{workdir}/log.log','sat')
+os.makedirs(workdir,exist_ok=True)
+logger = Logger(f'{workdir}/log.log','nn')
 
 def phi(mu, sigma):
     return torch.erf(mu / sigma / np.sqrt(2))

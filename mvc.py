@@ -14,8 +14,8 @@ from heo.log import Logger
 import os
 
 workdir = 'mvc'
-os.makedirs(workdir)
-logger = Logger(f'{workdir}/log.log','sat')
+os.makedirs(workdir,exist_ok=True)
+logger = Logger(f'{workdir}/log.log','mvc')
 
 size_pattern = re.compile(r'Final vertex cover size = (\d+)')
 time_pattern = re.compile(r'Time cost = (\d+\.\d+)')

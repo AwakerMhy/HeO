@@ -9,8 +9,8 @@ import torch
 import os
 
 workdir = 'pbo'
-os.makedirs(workdir)
-logger = Logger(f'{workdir}/log.log','sat')
+os.makedirs(workdir,exist_ok=True)
+logger = Logger(f'{workdir}/log.log','pbo')
 
 
 def simulated_annealing(enegry_func, dim, times=10000, beta0=1, rep_enegry=False):
@@ -110,7 +110,7 @@ W = W.cuda()
 energy_func = lambda x: (b * (torch.sigmoid(torch.matmul(W, x + a))).reshape(-1)).sum()
 energy_func_ensemble = lambda x: (b.reshape(-1, 1) * (torch.sigmoid(torch.matmul(W, x + a.reshape(-1, 1))))).sum(dim=0)
 
-p = mcge(dim, energy_func, times=50000, lr=1e-6, rep_energy=False, grad_sample_time=grad_sample_time)
+p = mcge(dim, energy_func_ensemble, times=50000, lr=1e-6, rep_energy=False, grad_sample_time=grad_sample_time)
 result = 2 * (p > 0.5).float() - 1
 energy = energy_func(result.cuda()).cpu().numpy()
 logger.log('mcge energy: {}'.format(energy))
