@@ -46,7 +46,7 @@ config = {'device':'cuda:0',
            'datapath': r'./example_data/rudy_all',
            'unbounded':False,
            'type':'sgd',
-           'lr':10,
+           'lr':2,
            'momentum':0,
            'T':5000
            }
