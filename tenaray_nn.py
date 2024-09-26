@@ -13,7 +13,7 @@ os.makedirs(workdir,exist_ok=True)
 logger = Logger(f'{workdir}/log.log','nn')
 
 def phi(mu, sigma):
-    return torch.erf(mu / sigma / np.sqrt(2))
+    return torch.erf(mu / sigma)
 
 def heo_train(dim, config, rep_energy=False):
     p1 = torch.rand([dim2, dim], device='cuda:0')
@@ -27,7 +27,7 @@ def heo_train(dim, config, rep_energy=False):
         energy_s = []
         uncern_s = []
     for t in range(config['T']):
-        sigma = (1 - t / config['T'])
+        sigma = (1 - t / config['T']) * np.sqrt(2)
         W = (phi(p1 - torch.rand([dim2, dim], device='cuda:0'), sigma) +
              phi(p2 - torch.rand([dim2, dim], device='cuda:0'), sigma)) / 2
         energy = ((new_work_ensemble(W, x) - y_real) ** 2).mean()

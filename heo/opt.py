@@ -11,7 +11,7 @@ class heo():
         self.opt_config = opt_config
 
     def phi(self, mu, sigma):
-        return torch.erf(mu / sigma / np.sqrt(2))
+        return torch.erf(mu / sigma)
     
     def initialize(self):
         self.theta = torch.ones(self.dim, device=self.device) * 0.5
@@ -20,7 +20,7 @@ class heo():
         self.energy = self.energy_func(x)
     
     def update(self, t, T):
-        sigma = (1 - t / T)
+        sigma = (1 - t / T) * np.sqrt(2)
         x = self.phi(self.theta - torch.rand(self.dim, device=self.device), sigma)
         self.energy = self.energy_func(x)
         self.energy.backward()

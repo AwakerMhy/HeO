@@ -12,7 +12,7 @@ import os
 timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
 
 def phi(mu, sigma):
-    return torch.erf(mu / sigma / np.sqrt(2))
+    return torch.erf(mu / sigma)
 
 
 def heo_linear_reg(dim, x_s, y_s, config):
@@ -25,7 +25,7 @@ def heo_linear_reg(dim, x_s, y_s, config):
     opt2 = optim.SGD([beta],lr=config['lr']/ratio_lr,momentum=config['momentum'])
 
     for t in range(config['steps']):
-        sigma = (1 - t / config['steps'])
+        sigma = (1 - t / config['steps']) * np.sqrt(2)
         x = (phi(theta - torch.rand(dim, device='cuda:0'), sigma) + 1) / 2
         pred_y = ((x * beta).reshape(-1, 1) * x_s).sum(dim=0)
         energy = ((y_s - pred_y) ** 2).mean()

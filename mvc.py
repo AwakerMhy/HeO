@@ -27,7 +27,7 @@ def refine(x):
     return x
 
 def phi(mu, sigma):
-    return torch.erf(mu / sigma / np.sqrt(2))
+    return torch.erf(mu / sigma)
 
 def heo_mvc(dim, enegry_func, config):
     p = torch.ones(dim, device='cuda:0') * 0.5
@@ -38,7 +38,7 @@ def heo_mvc(dim, enegry_func, config):
         opt=optim.Adam([p], lr=config['lr'])
     for t in range(config['T']):
         C = t / config['T'] * config['C_factor']
-        sigma = (1 - t / config['T'])
+        sigma = (1 - t / config['T']) * np.sqrt(2)
         x = phi(p - torch.rand(dim, device='cuda:0'), sigma)
         energy = enegry_func((x + 1) / 2, C)
         energy.backward()
