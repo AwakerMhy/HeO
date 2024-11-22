@@ -9,7 +9,7 @@ Combinatorial optimization problems are widespread but inherently challenging du
 
 ## Demo
 ![demo](src/demo.jpg)
-The ***Heat Diffusion Optimization (HeO)*** framework. The efficiency of searching a key in a dark room is significantly improved by employing navigation that utilizes heat emission from the key. In our framework, heat diffusion transforms the target function of a combinatorial optimization problem into different versions while preserving the location of the optima. Therefore, the gradient information of these transformed functions cooperatively help to optimize the original target function..
+The ***Heat Diffusion Optimization (HeO)*** framework. The efficiency of searching a key in a dark room is significantly improved by employing navigation that utilizes heat emission from the key. In our framework, heat diffusion transforms the target function of a combinatorial optimization problem into different versions while preserving the location of the optima. Therefore, the gradient information of these transformed functions cooperatively help to optimize the original target function.
 
 ## Requirement
 - Python 3.7
