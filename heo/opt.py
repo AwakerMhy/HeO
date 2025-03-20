@@ -54,9 +54,6 @@ class heo():
     def phi(self, mu, sigma):
         return torch.erf(mu / sigma / np.sqrt(2))
     
-    def rho(self, x):
-        return torch.tan(np.pi*x-0.5*np.pi)
-    
     def initialize(self):
         self.theta = torch.ones(self.dim, device=self.device) * 0.5
         self.theta.requires_grad = True
@@ -65,7 +62,7 @@ class heo():
     
     def update(self, t, T):
         sigma = (1 - t / T)
-        x = self.phi(self.rho(self.theta) - self.rho(torch.rand(self.dim, device=self.device)), sigma)
+        x = self.phi(self.theta - torch.rand(self.dim, device=self.device), sigma)
         self.energy = self.energy_func(x)
         self.energy.backward()
         self.opt.step()
